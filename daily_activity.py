@@ -2,6 +2,26 @@ import streamlit as st
 import pandas as pd
 import os
 from datetime import datetime
+import base64
+
+def set_background(image_file_path):
+    with open(image_file_path, 'rb') as img_file:
+        encoded_string = base64.b64encode(img_file.read()).decode()
+
+    css_code = f""" 
+    <style>
+    .stApp {{ 
+        background-image: url("data:image/png;base64,{encoded_string}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }}
+    </style>
+    """
+    
+    st.markdown(css_code, unsafe_allow_html=True)
+
+set_background('9161244.png')
 
 # Path file CSV
 file_path = "activity.csv"
